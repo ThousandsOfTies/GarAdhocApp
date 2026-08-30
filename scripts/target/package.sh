@@ -6,7 +6,7 @@
 # write artifacts/from-codespace/artifact.json with a deploy.app section.
 set -euo pipefail
 
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 if [[ -f "${repo_root}/config/product.env" ]]; then
   # shellcheck disable=SC1091
@@ -25,7 +25,7 @@ product_target_build() {
   # Example:
   #   make -C "${app_dir}" target-build GAR_TOOLS_ROOT="${tools_dir}"
   echo "No target build command configured for ${GAR_PRODUCT_NAME:-this product}." >&2
-  echo "Implement scripts/targets/raspberry-pi-5/package.sh on this product branch." >&2
+  echo "Implement scripts/target/package.sh in this Product repository." >&2
   return 1
 }
 
