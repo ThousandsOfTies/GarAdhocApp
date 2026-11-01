@@ -1,32 +1,13 @@
 #!/usr/bin/env bash
-# Copy this file to scripts/product-target-build.sh on a product branch, then
-# replace product_target_build with the product's physical-target build command.
-#
-# GaplessAgentRuntime invokes this hook for `gar target app build`.  The hook must
-# write artifacts/from-codespace/artifact.json with a deploy.app section.
+# Product artifact selection; build and launch generation live in gar-tools.
 set -euo pipefail
-
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 if [[ -f "${repo_root}/config/product.env" ]]; then
-  # shellcheck disable=SC1091
   source "${repo_root}/config/product.env"
 fi
-
-app_dir="${repo_root}/${GAR_TARGET_APP_DIR:-${GAR_SIM_APP_DIR:-sources/your-app}}"
-tools_dir="${repo_root}/${GAR_TOOLS_DIR:-sources/gar-tools}"
-
-if [[ ! -d "${app_dir}" || ! -d "${tools_dir}" ]]; then
-  echo "missing target sources; run: git submodule update --init --recursive" >&2
-  exit 1
+output="${GAR_TARGET_ARTIFACT_ROOT:-artifacts/from-codespace}"
+if [[ "$#" -eq 1 && "$1" == clean ]]; then
+  exec python3 "${repo_root}/tools/product.py" clean --output "$output"
 fi
-
-product_target_build() {
-  # Example:
-  #   make -C "${app_dir}" target-build GAR_TOOLS_ROOT="${tools_dir}"
-  echo "No target build command configured for ${GAR_PRODUCT_NAME:-this product}." >&2
-  echo "Implement scripts/target/package.sh in this Product repository." >&2
-  return 1
-}
-
-product_target_build
+if [[ "$#" -ne 0 ]]; then echo "usage: $0 [clean]" >&2; exit 2; fi
+exec python3 "${repo_root}/tools/product.py" package --replace --output "$output"

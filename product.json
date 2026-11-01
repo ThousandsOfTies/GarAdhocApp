@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "gar-adhoc-app-rpi5",
+  "status": "planned",
+  "components": {
+    "application": "sources/gar-adhoc-app",
+    "tools": "sources/gar-tools",
+    "board": "sources/board-raspberry-pi-5"
+  },
+  "board_profile": "raspberry-pi-os-arm64",
+  "hardware": {"physical": "hardware", "simulation": "hardware"},
+  "build": {
+    "backend": "planned", "directory": "build/composed-target",
+    "reason": "The sensor demo has no qualified Raspberry Pi 5 physical build/install hook yet."
+  },
+  "launch": {"entrypoint": "sensor_demo", "runtime": "native"},
+  "deployment": {"manager": "gar-target", "application_id": "gar-adhoc-app"},
+  "payload": [{"component": "application", "include": ["app/*.c", "app/*.h"], "destination": "src"}]
+}

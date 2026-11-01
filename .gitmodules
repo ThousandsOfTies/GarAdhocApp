@@ -1,8 +1,9 @@
 [submodule "sources/gar-adhoc-app"]
 	path = sources/gar-adhoc-app
 	url = https://github.com/ThousandsOfTies/gar-adhoc-app
-	branch = main
 [submodule "sources/gar-tools"]
 	path = sources/gar-tools
 	url = https://github.com/ThousandsOfTies/gar-tools
-	branch = main
+[submodule "sources/board-raspberry-pi-5"]
+	path = sources/board-raspberry-pi-5
+	url = https://github.com/ThousandsOfTies/gar-board-raspberry-pi-5.git
