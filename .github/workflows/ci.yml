@@ -16,5 +16,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: |
+          python tools/product.py describe
+          python tools/product.py validate
           make check-target
           python -m unittest discover -s tests -v

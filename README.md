@@ -1,5 +1,11 @@
 # GarAdhocApp
 
+アプリ・共通ツール・基板情報をsubmoduleで組み合わせる構成は
+[product.json](product.json)と[構成説明](docs/COMPOSITION.md)を参照してください。
+この整理は`refactor/board-composition`ブランチにあります。
+基板情報の共通repoは[gar-board-raspberry-pi-5](https://github.com/ThousandsOfTies/gar-board-raspberry-pi-5)です。
+`python tools/product.py describe`で、実際の構成と固定コミットを確認できます。
+
 `gar-adhoc-app` applicationと `raspberry-pi-5` 物理targetを固定した独立Product
 repositoryです。Codespaces/devcontainer設定、Product固有hardware、build hook、
 固定artifact契約を同じrepositoryで管理します。別の物理targetは別Product
